@@ -7,7 +7,7 @@ set -e
 : "${BIN_CPIO:=$(type -P gnucpio || type -P cpio)}"
 
 # get parameters
-SSH_PUBLIC_KEY_FILE=${1:-"$HOME/.ssh/id_rsa.pub"}
+SSH_PUBLIC_KEY_FILE=${1:-"`pwd`/id_rsa.pub"}
 TARGET_ISO=${2:-"`pwd`/ubuntu-18.04-netboot-amd64-unattended.iso"}
 
 # check if ssh key exists
@@ -25,7 +25,7 @@ TMP_DISC_DIR="`mktemp -d`"
 TMP_INITRD_DIR="`mktemp -d`"
 
 # download and extract netboot iso
-SOURCE_ISO_URL="http://archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso"
+SOURCE_ISO_URL="http://ch.archive.ubuntu.com/ubuntu/dists/bionic/main/installer-amd64/current/images/netboot/mini.iso"
 cd "$TMP_DOWNLOAD_DIR"
 wget -4 "$SOURCE_ISO_URL" -O "./netboot.iso"
 "$BIN_7Z" x "./netboot.iso" "-o$TMP_DISC_DIR"
